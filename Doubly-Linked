@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+    public:
+        int value;
+        Node* next;
+        Node* prev;      
+};
+
+void printNode(Node* head) {
+    Node* transverse = head;
+    while (transverse != NULL) {
+        cout << transverse->value << endl;
+        transverse = transverse->next;
+    }
+}
+
+int main() {
+
+    Node* head;
+    Node* tail;
+
+//Creates the first node. Remember: Every node has a head, value, and a tail
+//First declaration has a pointer* as this is a dynamically changing linkedList    
+    Node* node = new Node();
+    node->value = 8;
+    node->prev = nullptr;
+    head = node;
+    tail = node;
+
+//Create the second node.
+    node = new Node();
+    node->value = 5;
+    node->prev = tail;
+//Assigns tail to the next node    
+    tail->next = node;
+    tail = node;
+
+//Already allocated first dec. of node in the list, so does not need another pointer again.
+    node = new Node();
+    node->value = 9;
+    node->next = nullptr;
+    node->prev = tail;
+    tail->next = node;
+    tail = node;
+
+    printNode(head);
+}
