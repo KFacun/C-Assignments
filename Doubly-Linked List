@@ -16,6 +16,41 @@ void printNode(Node* head) {
     }
 }
 
+void insertAtTheFront(Node**head, int newValue) {
+    Node* newNode = new Node();
+    newNode->value = newValue;
+    newNode->next = *head;
+    *head = newNode;
+}
+
+void insertAtTheEnd(Node**head, int newValue) {
+    Node* newNode = new Node();
+    newNode->value = newValue;
+    newNode->next = NULL;
+    
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+
+    Node* last = *head;
+        while (last->next != NULL) {
+        last = last->next;
+    }
+    last->next = newNode;
+}
+
+void insertAfter(Node*prev, int newValue) {
+    if (prev == NULL) {
+        cout << "Previous Node cannot be Null";
+        return;
+    }
+    Node* newNode = new Node();
+    newNode->value = newValue;
+    newNode->next = prev->next;
+    prev->next = newNode;
+}
+
 int main() {
 
     Node* head;
@@ -45,5 +80,8 @@ int main() {
     tail->next = node;
     tail = node;
 
+    insertAtTheFront(&head, 3);
+    insertAtTheEnd(&head, 6);
+    insertAfter(head, 4);
     printNode(head);
 }
