@@ -1,0 +1,31 @@
+#include <iostream>
+
+int Partition(int num[], int lowInd, int highInd) {
+    int midpoint = lowInd + (highInd - lowInd) / 2;
+    int pivot = num[midpoint];
+    int temp;
+
+    bool done = false;
+
+    while (!done) {
+        while (num[lowInd] < pivot) {
+            lowInd++;
+        }
+        while (pivot < num[highInd]) {
+            highInd--;
+        }
+
+        if (lowInd >= highInd) {
+            done = true;
+        } else {
+            temp = num[lowInd];
+            num[lowInd] = num[highInd];
+            num[highInd] = temp;
+
+            lowInd++;
+            highInd--;
+        }
+    }
+
+    return highInd;
+}
